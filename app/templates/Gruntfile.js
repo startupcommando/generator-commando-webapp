@@ -56,9 +56,9 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },<% if (includeSass) { %>
-      sass: {
-        files: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['sass:server', 'autoprefixer']
+      compass: {
+          files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
+          tasks: ['compass:server', 'autoprefixer']
       },<% } %>
       styles: {
         files: ['<%%= config.app %>/styles/{,*/}*.css'],
@@ -81,7 +81,7 @@ module.exports = function (grunt) {
     connect: {
       options: {
         port: 9000,
-        open: true,
+        open: false,
         livereload: 35729,
         // Change this to '0.0.0.0' to access the server from outside
         hostname: 'localhost'
@@ -190,31 +190,32 @@ module.exports = function (grunt) {
     },<% } %><% if (includeSass) { %>
 
     // Compiles Sass to CSS and generates necessary files if requested
-    sass: {
-      options: {<% if (includeLibSass) { %>
-        sourceMap: true,
-        includePaths: ['bower_components']
-        <% } else { %>
-        loadPath: 'bower_components'
-      <% } %>},
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%%= config.app %>/styles',
-          src: ['*.{scss,sass}'],
-          dest: '.tmp/styles',
-          ext: '.css'
-        }]
-      },
-      server: {
-        files: [{
-          expand: true,
-          cwd: '<%%= config.app %>/styles',
-          src: ['*.{scss,sass}'],
-          dest: '.tmp/styles',
-          ext: '.css'
-        }]
-      }
+    compass: {
+        options: {
+            sassDir: '<%= config.app %>/styles',
+            specify: '<%= config.app %>/styles/main.scss',
+            cssDir: '.tmp/styles',
+            generatedImagesDir: '.tmp/images/generated',
+            imagesDir: '<%= config.app %>/images',
+            javascriptsDir: '<%= config.app %>/scripts',
+            fontsDir: '<%= config.app %>/styles/fonts',
+            importPath: 'bower_components',
+            httpImagesPath: '/images',
+            httpGeneratedImagesPath: '/images/generated',
+            httpFontsPath: '/styles/fonts',
+            relativeAssets: false,
+            assetCacheBuster: false
+        },
+        dist: {
+            options: {
+                generatedImagesDir: '<%= config.dist %>/images/generated'
+            }
+        },
+        server: {
+            options: {
+                debugInfo: true
+            }
+        }
     },<% } %>
 
     // Add vendor prefixed styles

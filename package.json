@@ -1,10 +1,10 @@
 {
-  "name": "generator-webapp",
-  "version": "0.5.0",
-  "description": "Scaffold out a front-end web app",
+  "name": "generator-commando-webapp",
+  "version": "0.1.0",
+  "description": "Scaffold out a front-end web app for commandos",
   "license": "BSD",
-  "repository": "yeoman/generator-webapp",
-  "author": "The Yeoman Team",
+  "repository": "startupcommando/generator-commando-webapp",
+  "author": "StartupCommando",
   "main": "app/index.js",
   "engines": {
     "node": ">=0.10.0",
