@@ -418,7 +418,7 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up build process
     concurrent: {
       server: [<% if (includeSass) { %>
-        'sass:server',<% } if (coffee) {  %>
+        'compass:server',<% } if (coffee) {  %>
         'coffee:dist',<% } %>
         'copy:styles'
       ],
@@ -428,7 +428,7 @@ module.exports = function (grunt) {
       ],
       dist: [<% if (coffee) { %>
         'coffee',<% } if (includeSass) { %>
-        'sass',<% } %>
+        'compass',<% } %>
         'copy:styles',
         'imagemin',
         'svgmin'
